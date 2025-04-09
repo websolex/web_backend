@@ -1,5 +1,5 @@
 const subscribeService = require('../controller/subscribecontroller');
-
+const { subscribeEmail } = require('../config/sendmail')
 // app.post("/subscribe", );
 const postsubscribe = async (req, res) => {
     console.log(req.body);
@@ -10,6 +10,7 @@ const postsubscribe = async (req, res) => {
         }
         const sub = new subscribeService({ email });
         const doc = await sub.save();
+        subscribeEmail(email);
         res.status(201).json({ message: "Form submitted successfully", data: doc });
     } catch (error) {
         console.error("Error saving form:", error);
