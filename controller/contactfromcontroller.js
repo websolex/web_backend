@@ -1,5 +1,5 @@
 const contactfromModel = require('../model/contactme');
-
+const { contactEmail } = require('../config/sendmail')
 // app.post("/contactform", );
 const contactpost = async (req, res) => {
     console.log(req.body);
@@ -16,6 +16,7 @@ const contactpost = async (req, res) => {
             message,
         });
         const doc = await contact.save();
+        contactEmail(name, email, contactnumber, subject, message);
         res.status(201).json({ message: "Form submitted successfully", data: doc });
     } catch (error) {
         console.error("Error saving form:", error);
