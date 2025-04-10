@@ -152,7 +152,7 @@ const contactuserEmail = async (name, email) => {
         const info = await transporter.sendMail({
             from: '"Websolex infotech" <developerwebsolex@gmail.com>',
             to: email, // list of receivers
-            subject: `your contact from send websolex infotech contact will be soon`, // Subject line
+            subject: `Your contact from send websolex infotech contact will be soon`, // Subject line
             text: "your contact from send websolex infotech contact will be soon", // plain text body
             html: `<div style="background-color:#ffffff; margin:30px auto; padding:20px; border-radius:10px; box-shadow:0 2px 4px rgba(0, 0, 0, 0.1); max-width:600px; width:100%;">
   <div style="text-align:center; padding-bottom:20px;">
