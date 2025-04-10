@@ -1,22 +1,29 @@
 const nodeMailer = require("nodemailer");
+const dotenv = require("dotenv");
+dotenv.config({ path: ".env" });
+const EMAIL = process.env.EMAIL;
+const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD;
+const EMAIL_HOST = process.env.EMAIL_HOST;
+const EMAIL_PORT = process.env.EMAIL_PORT;
+const MAIN_EMAIL = process.env.MAIN_EMAIL;
 
 const transporter = nodeMailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false, // true for port 465, false for other ports
+    host: EMAIL_HOST,
+    port: EMAIL_PORT,
+    secure: false,
     auth: {
-        user: "developerwebsolex@gmail.com",
-        pass: "cobz djsh aekz zxvx",
+        user: EMAIL,
+        pass: EMAIL_PASSWORD,
     },
 });
 
 const sendemail = async (email, name, password) => {
     try {
         const info = await transporter.sendMail({
-            from: '"Websolex infotech" <developerwebsolex@gmail.com>',
-            to: email, // list of receivers
-            subject: "Admin Access", // Subject line
-            text: "websolex infotech admin", // plain text body
+            from: `"Websolex infotech" <${EMAIL}>`,
+            to: email,
+            subject: "Admin Access",
+            text: "websolex infotech admin",
             html: `<div style="background-color:#ffffff; margin:30px auto; padding:20px; border-radius:10px; box-shadow:0 2px 4px rgba(0, 0, 0, 0.1); max-width:600px; width:100%;">
   <div style="text-align:center; padding-bottom:20px;">
     <img src="https://www.t3bucket.com/f/0-WebSolexInfotech-FullStackDevelopment20240624_154346.jpg" alt="WebSolex Logo" style="width:100px; border-radius:50%;" />
@@ -46,7 +53,7 @@ const sendemail = async (email, name, password) => {
 const subscribeEmail = async (email) => {
     try {
         const info = await transporter.sendMail({
-            from: '"Websolex infotech" <developerwebsolex@gmail.com>',
+            from: `"Websolex infotech" <${EMAIL}>`,
             to: email, // list of receivers
             subject: "your email is subscribe succesfully", // Subject line
             text: "websolex infotech admin", // plain text body
@@ -80,8 +87,8 @@ const subscribeEmail = async (email) => {
 const subscribeownEmail = async (email) => {
     try {
         const info = await transporter.sendMail({
-            from: '"Websolex infotech" <developerwebsolex@gmail.com>',
-            to: "websolexinfotech@gmail.com", // list of receivers
+            from: `"Websolex infotech" <${EMAIL}>`,
+            to: MAIN_EMAIL, // list of receivers
             subject: "your email is subscribe succesfully", // Subject line
             text: "websolex infotech admin", // plain text body
             html: `<div style="background-color:#ffffff; margin:30px auto; padding:20px; border-radius:10px; box-shadow:0 2px 4px rgba(0, 0, 0, 0.1); max-width:600px; width:100%;">
@@ -114,8 +121,8 @@ const subscribeownEmail = async (email) => {
 const contactEmail = async (name, email, contactnumber, subject, message) => {
     try {
         const info = await transporter.sendMail({
-            from: '"Websolex infotech" <developerwebsolex@gmail.com>',
-            to: "websolexinfotech@gmail.com", // list of receivers
+            from: `"Websolex infotech" <${EMAIL}>`,
+            to: MAIN_EMAIL, // list of receivers
             subject: subject, // Subject line
             text: "websolex infotech admin", // plain text body
             html: `<div style="background-color:#ffffff; margin:30px auto; padding:20px; border-radius:10px; box-shadow:0 2px 4px rgba(0, 0, 0, 0.1); max-width:600px; width:100%;">
@@ -150,7 +157,7 @@ const contactEmail = async (name, email, contactnumber, subject, message) => {
 const contactuserEmail = async (name, email) => {
     try {
         const info = await transporter.sendMail({
-            from: '"Websolex infotech" <developerwebsolex@gmail.com>',
+            from: `"Websolex infotech" <${EMAIL}>`,
             to: email, // list of receivers
             subject: `Your contact from send websolex infotech contact will be soon`, // Subject line
             text: "your contact from send websolex infotech contact will be soon", // plain text body
