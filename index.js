@@ -18,7 +18,7 @@ database()
 const allowedOrigins = [
     'http://localhost:3000',
     'http://localhost:3001',
-    'https://www.websolexinfotech.com/',
+    'https://www.websolexinfotech.com',
     "https://websolex-admin-panal.vercel.app"
 ];
 
@@ -35,7 +35,7 @@ const corsOptions = {
     allowedHeaders: ['Content-Type', 'Authorization'] 
 };
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 
