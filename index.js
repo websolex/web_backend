@@ -3,7 +3,6 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const apiRouter = require('./routes/index')
-const mongoose = require('mongoose');
 dotenv.config({ path: ".env" });
 const app = express();
 const database = require('./config/database')

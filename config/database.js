@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const MongoDB = process.env.MONGO_URI
+const MongoDB = process.env.MONGO_URI || "mongodb+srv://developerwebsolex:p5772iW8isrf6QZS@webolsex.smx0ni3.mongodb.net/?retryWrites=true&w=majority&appName=webolsex"
 const connectDB = async () => {
 
     try {
