@@ -6,13 +6,13 @@ const apiRouter = require('./routes/index')
 const mongoose = require('mongoose');
 dotenv.config({ path: ".env" });
 const app = express();
-const { connectDB } = require('./config/database')
+const database = require('./config/database')
 
 
 
 
 
-connectDB()
+database()
 
 
 const allowedOrigins = [
@@ -33,8 +33,7 @@ const corsOptions = {
     allowedHeaders: ['Content-Type', 'Authorization'] 
 };
 
-// app.use(cors(corsOptions));
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 
