@@ -3,11 +3,30 @@ const ContactDetails = require('../model/contactdetails');
 const postcontectdetails = async (req, res) => {
     try {
         const { address, phoneno, avaliablity, email } = req.body;
-        const contactDetails = new ContactDetails({ address, phoneno, avaliablity, email });
-        const savedContactDetails = await contactDetails.save();
+
+
+
+        const existingDetails = await ContactDetails.findOne();
+
+        let ContactDetails;
+
+        if (existingDetails) {
+            // Update the existing document
+            ContactDetails = await ContactDetails.findByIdAndUpdate(
+                existingDetails._id,
+                { address, phoneno, avaliablity, email },
+                { new: true }
+            );
+        } else {
+            // Create a new document
+            const newDetails = new ContactDetails({
+                address, phoneno, avaliablity, email
+            });
+            ContactDetails = await newDetails.save();
+        }
         res.status(200).json({
             message: 'Contact details created successfully',
-            contactDetails: savedContactDetails,
+            ContactDetails,
         });
     } catch (error) {
         console.error('Error creating contact details:', error);
@@ -16,7 +35,7 @@ const postcontectdetails = async (req, res) => {
 }
 const getcontectdetails = async (req, res) => {
     try {
-        const contactDetails = await ContactDetails.find();
+        const contactDetails = await ContactDetails.findOne();
         res.status(200).json(contactDetails);
     } catch (error) {
         console.error('Error fetching contact details:', error);

@@ -1,4 +1,4 @@
-const subscribeService = require('../controller/subscribecontroller');
+const subscribeService = require('../model/subscribe');
 const { subscribeEmail } = require('../config/sendmail')
 // app.post("/subscribe", );
 const postsubscribe = async (req, res) => {

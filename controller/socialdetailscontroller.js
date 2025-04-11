@@ -3,25 +3,43 @@ const SocialDetails = require("../model/social");
 const addsocial = async (req, res) => {
   try {
     const { facebook, whatsapp, instagram, linkedin } = req.body;
-    const socialDetails = new SocialDetails({
-      facebook,
-      whatsapp,
-      instagram,
-      linkedin,
-    });
-    const savedSocialDetails = await socialDetails.save();
+
+    // Check if social details already exist
+    const existingDetails = await SocialDetails.findOne();
+
+    let socialDetails;
+
+    if (existingDetails) {
+      // Update the existing document
+      socialDetails = await SocialDetails.findByIdAndUpdate(
+        existingDetails._id,
+        { facebook, whatsapp, instagram, linkedin },
+        { new: true }
+      );
+    } else {
+      // Create a new document
+      const newDetails = new SocialDetails({
+        facebook,
+        whatsapp,
+        instagram,
+        linkedin,
+      });
+      socialDetails = await newDetails.save();
+    }
+
     res.status(200).json({
-      message: "Social details created successfully",
-      socialDetails: savedSocialDetails,
+      message: "Social details created or updated successfully",
+      socialDetails,
     });
+
   } catch (error) {
-    console.error("Error creating social details:", error);
+    console.error("Error creating/updating social details:", error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
 const getsocial = async (req, res) => {
   try {
-    const socialDetails = await SocialDetails.find();
+    const socialDetails = await SocialDetails.findOne();
     res.status(200).json(socialDetails);
   } catch (error) {
     console.error("Error fetching social details:", error);

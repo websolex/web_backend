@@ -3,12 +3,27 @@ const Project = require('../model/projects')
 const addproject = async (req, res) => {
     try {
         const { totalClients, completedProjects } = req.body;
-        const project = new Project({ totalClients, completedProjects });
-        const savedProject = await project.save();
+        const existingProject = await Project.findOne();
+        let project;
+        if (existingProject) {
+            // Update the existing document
+            project = await Project.findByIdAndUpdate(
+                existingProject._id,
+                { totalClients, completedProjects },
+                { new: true }
+            );
+        }
+        else {
+            // Create a new document
+            project = new Project({
+                totalClients,
+                completedProjects
+            });
+        }
         res.status(200).json({
             message: 'Project created successfully',
             type: "success",
-            project: savedProject,
+            project,
         });
     } catch (error) {
         console.error('Error creating project:', error);
@@ -17,7 +32,7 @@ const addproject = async (req, res) => {
 }
 const getproject = async (req, res) => {
     try {
-        const projects = await Project.find();
+        const projects = await Project.findOne();
         res.status(200).json({
             projects
         });

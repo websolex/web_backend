@@ -4,7 +4,7 @@ const LoginHistory = require("../model/LoginHistory")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 const dotenv = require('dotenv');
-const sendEmail = require("../config/sendmail")
+const { sendemail } = require("../config/sendmail")
 dotenv.config();
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
@@ -25,7 +25,7 @@ const Createuser = async (req, res) => {
             status: "pending"
         });
         const doc = await user.save();
-        sendEmail(user.email, user.name, password)
+        sendemail(user.email, user.name, password)
         res
             .status(201)
             .json({ message: "User  registered successfully", user: doc });
