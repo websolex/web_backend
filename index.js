@@ -6,9 +6,10 @@ const apiRouter = require('./routes/index')
 dotenv.config({ path: ".env" });
 const app = express();
 const database = require('./config/database')
+const { injectSpeedInsights } = require('@vercel/speed-insights')
 
 
-
+injectSpeedInsights()
 
 
 database()
