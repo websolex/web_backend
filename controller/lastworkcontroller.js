@@ -35,6 +35,22 @@ const getourwork = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error", type: "error", });
   }
 };
+const getourworkbyid = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const lastWork = await LastWork.findById(id);
+    if (!lastWork) {
+      return res.status(404).json({ message: "Last work not found", type: "error" });
+    }
+
+    res.status(200).json({ lastWork, type: "success" });
+  } catch (error) {
+    console.error("Error fetching last work by ID:", error);
+    res.status(500).json({ message: "Internal Server Error", type: "error" });
+  }
+};
+
 
 const updateourwork = async (req, res) => {
   try {
@@ -96,4 +112,5 @@ module.exports = {
   getourwork,
   updateourwork,
   deleteourwork,
+  getourworkbyid
 };

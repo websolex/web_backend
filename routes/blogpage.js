@@ -5,7 +5,8 @@ const blogcontroller = require('../controller/blogcontroller')
 const uploads = require('../config/multer')
 
 router.post('/', protector, uploads.single('image_client_work'), blogcontroller.postblog);
-router.get('/', protector, blogcontroller.getblog);
+router.get('/', blogcontroller.getblog);
+router.get('/:id', blogcontroller.getblogbyid);
 router.put('/:id', protector, uploads.single('image_client_work'), blogcontroller.updateblog);
 router.delete('/:id', protector, blogcontroller.deleteblog);
 

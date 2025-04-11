@@ -6,6 +6,7 @@ const ourworkcontroller = require("../controller/lastworkcontroller");
 
 router.post("/", upload.single("image_work"), ourworkcontroller.postourwork);
 router.get("/", ourworkcontroller.getourwork);
+router.get("/:id", ourworkcontroller.getourworkbyid);
 router.put(
   "/:id",
   upload.single("image_work"),

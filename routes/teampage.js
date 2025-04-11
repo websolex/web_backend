@@ -3,13 +3,13 @@ const router = express.Router();
 const TeamPagecontroller = require('../controller/teampagecontroller');
 const upload = require('../config/multer');
 
+const protector = require('../middleware/auth');
 
-
-router.post('/',  upload.single('image'),TeamPagecontroller.addteam);
-router.get('/',TeamPagecontroller.getteam );
-router.get('/:id',TeamPagecontroller.getbyidteam );
-router.put('/:id',  upload.single('image'),TeamPagecontroller.putteam );
-router.delete('/:id',TeamPagecontroller.deleteteam  );
+router.post('/', protector, upload.single('image'), TeamPagecontroller.addteam);
+router.get('/', TeamPagecontroller.getteam);
+router.get('/:id', protector, TeamPagecontroller.getbyidteam);
+router.put('/:id', protector, upload.single('image'), TeamPagecontroller.putteam);
+router.delete('/:id', protector, TeamPagecontroller.deleteteam);
 
 
 

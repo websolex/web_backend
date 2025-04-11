@@ -33,6 +33,23 @@ const postblog = async (req, res) => {
         res.status(500).json({ message: "Internal Server Error" });
     }
 }
+const getblogbyid = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const blogPost = await BlogPage.findById(id);
+
+        if (!blogPost) {
+            return res.status(404).json({ message: "Blog post not found" });
+        }
+
+        res.status(200).json(blogPost);
+    } catch (error) {
+        console.error("Error fetching blog post by ID:", error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
 const getblog = async (req, res) => {
     try {
         const blogPosts = await BlogPage.find();
@@ -109,5 +126,6 @@ module.exports = {
     postblog,
     getblog,
     updateblog,
-    deleteblog
+    deleteblog,
+    getblogbyid
 }
