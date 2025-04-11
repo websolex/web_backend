@@ -6,13 +6,13 @@ const apiRouter = require('./routes/index')
 const mongoose = require('mongoose');
 dotenv.config({ path: ".env" });
 const app = express();
-const database = require('./config/database')
+const { connectDB } = require('./config/database')
 
 
 
 
 
-database()
+connectDB()
 
 
 const allowedOrigins = [
