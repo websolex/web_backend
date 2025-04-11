@@ -1,5 +1,5 @@
 const contactfromModel = require('../model/contactme');
-const { contactEmail } = require('../config/sendmail')
+const { contactEmail, contactuserEmail } = require('../config/sendmail')
 // app.post("/contactform", );
 const contactpost = async (req, res) => {
     console.log(req.body);

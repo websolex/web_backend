@@ -186,4 +186,4 @@ const contactuserEmail = async (name, email) => {
     }
 };
 
-module.exports = { sendemail, subscribeEmail, contactEmail };
+module.exports = { sendemail, contactuserEmail, subscribeEmail, contactEmail };
