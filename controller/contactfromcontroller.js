@@ -11,12 +11,13 @@ const contactpost = async (req, res) => {
         const contact = new contactfromModel({
             name,
             email,
-            contactnumber,
+            contactnumber, 
             subject,
             message,
         });
         const doc = await contact.save();
         contactEmail(name, email, contactnumber, subject, message);
+        contactuserEmail(name, email);
         res.status(201).json({ message: "Form submitted successfully", data: doc });
     } catch (error) {
         console.error("Error saving form:", error);

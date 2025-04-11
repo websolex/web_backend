@@ -148,7 +148,6 @@ const contactEmail = async (name, email, contactnumber, subject, message) => {
 
 `, // html body
         });
-        contactuserEmail(name, email)
         console.log(info);
     } catch (error) {
         console.log(error);
