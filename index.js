@@ -33,7 +33,8 @@ const corsOptions = {
     allowedHeaders: ['Content-Type', 'Authorization'] 
 };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+app.use(cors());
 app.use(bodyParser.json());
 
 
