@@ -7,7 +7,7 @@ const protector = require('../middleware/auth');
 
 router.post('/', protector, upload.single('image'), TeamPagecontroller.addteam);
 router.get('/', TeamPagecontroller.getteam);
-router.get('/:id', protector, TeamPagecontroller.getbyidteam);
+router.get('/:id', TeamPagecontroller.getbyidteam);
 router.put('/:id', protector, upload.single('image'), TeamPagecontroller.putteam);
 router.delete('/:id', protector, TeamPagecontroller.deleteteam);
 

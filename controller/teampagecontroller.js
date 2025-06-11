@@ -55,12 +55,19 @@ const deleteteam = async (req, res) => {
     try {
         const { id } = req.params;
         const teamMember = await TeamPage.findById(id);
+
         if (!teamMember) {
             return res.status(404).json({ message: 'Team member not found' });
         }
-        const publicId = teamMember.imageUrl.split('/').pop().split('.')[0];
-        await cloudinary.uploader.destroy(publicId);
+
+        // Check if imageUrl exists
+        if (teamMember.imageUrl) {
+            const publicId = teamMember.imageUrl.split('/').pop().split('.')[0];
+            await cloudinary.uploader.destroy(publicId);
+        }
+
         const deletedMember = await TeamPage.findByIdAndDelete(id);
+
         if (!deletedMember) {
             return res.status(404).json({ message: 'Team member not found' });
         }

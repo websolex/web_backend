@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const protector = require('../middleware/auth');
 const {
     getViewCount,
     incrementViewCount

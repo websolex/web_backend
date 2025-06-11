@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const ContactDetailcontroller = require('../controller/contactdetilscontroller');
+const protector = require('../middleware/auth')
 
 
 
-router.post('/', ContactDetailcontroller.postcontectdetails );
-router.get('/', ContactDetailcontroller.getcontectdetails )
-router.put('/', ContactDetailcontroller.putcontectdetails );
+router.post('/', protector, ContactDetailcontroller.postcontectdetails);
+router.get('/', ContactDetailcontroller.getcontectdetails)
+router.put('/', protector, ContactDetailcontroller.putcontectdetails);
 
 module.exports = router;
 
