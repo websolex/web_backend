@@ -21,23 +21,23 @@ const allowedOrigins = [
     "http://localhost:53766",
     'https://www.websolexinfotech.com',
     "https://websolex-admin-panal.vercel.app",
-    "https://websolex-frontend-client.vercel.app/"
+    "https://websolex-frontend-client.vercel.app"
 ];
 
 const corsOptions = {
     origin: function (origin, callback) {
-        if (allowedOrigins.includes(origin) || !origin) {  
+        if (allowedOrigins.includes(origin) || !origin) {
             callback(null, true);
         } else {
             callback(new Error('Not allowed by CORS'));
         }
     },
-    credentials: true,  
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], 
-    allowedHeaders: ['Content-Type', 'Authorization'] 
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 };
 
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(bodyParser.json());
 
 
